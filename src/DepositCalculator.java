@@ -1,18 +1,18 @@
 import java.util.Scanner;
 
 public class DepositCalculator {
-    double calculateComplexPercent(double amount, double yearRate, int depositPeriod) {
-        double pay = amount * Math.pow((1 + yearRate / 12), 12 * depositPeriod);
-        return round(pay, 2);
+    double calculateComplexPercent(double amount, int depositPeriod) {
+        double pay = amount * Math.pow((1 + 0.06 / 12), 12 * depositPeriod);
+        return round(pay);
     }
 
-    double calculateSimplePercent(double amount, double yearRate, int depositPeriod) {
-        return round(amount + amount * yearRate * depositPeriod, 2);
+    double calculateSimplePercent(double amount, int depositPeriod) {
+        return round(amount + amount * 0.06 * depositPeriod);
     }
 
-    double round(double value, int places) {
-        double ScaLe = Math.pow(10, places);
-        return Math.round(value * ScaLe) / ScaLe;
+    double round(double value) {
+        double scale = Math.pow(10, 2);
+        return Math.round(value * scale) / scale;
     }
 
     void openDeposit() {
@@ -31,9 +31,9 @@ public class DepositCalculator {
         action = scanner.nextInt();
 
         if (action == 1) {
-            totalSum = calculateSimplePercent(amount, 0.06, period);
+            totalSum = calculateSimplePercent(amount, period);
         } else if (action == 2) {
-            totalSum = calculateComplexPercent(amount, 0.06, period);
+            totalSum = calculateComplexPercent(amount, period);
         }
 
         System.out.println("Результат вклада: " + amount + " за " + period + " лет превратятся в " + totalSum);
